@@ -10,3 +10,11 @@ class TodoRead(BaseModel):
     title: str
     content: str
     is_checked: bool
+    
+class TodoUpdate(BaseModel):
+    title: str
+    content: str
+    is_checked: bool
+    
+class TodoUpdateCheckStatus(BaseModel):
+    is_checked: bool

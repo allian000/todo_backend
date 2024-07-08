@@ -12,3 +12,17 @@ def create_todo(db: Session, todo: TodoSchema.TodoCreate):
     db.commit()
     db.refresh(db_todo)
     return db_todo
+
+def update_todo(db: Session,itemId:int, todoItem: TodoSchema.TodoUpdate):
+    db_item = db.query(TodoModel.Todo).filter(TodoModel.Todo.id == itemId).first()
+    db_item.title = todoItem.title
+    db_item.content = todoItem.content
+    db_item.is_checked = todoItem.is_checked
+    db.commit()
+    return db_item
+
+def update_todo_check_status(db: Session,itemId:int, todoItem: TodoSchema.TodoUpdateCheckStatus):
+    db_item = db.query(TodoModel.Todo).filter(TodoModel.Todo.id == itemId).first()
+    db_item.is_checked = todoItem.is_checked
+    db.commit()
+    return db_item

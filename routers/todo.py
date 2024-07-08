@@ -14,3 +14,11 @@ def getTodoList(db:Session = Depends(get_db)):
 @router.post("/", response_model=schemas.TodoRead)
 def createTodo(todo:schemas.TodoCreate, db:Session = Depends(get_db)):
     return crud.create_todo(db, todo)
+
+@router.put("/updateTodo/{todo_id}")
+def updateTodo(todo_id: int, todoItem:schemas.TodoUpdate, db:Session = Depends(get_db)):
+    return crud.update_todo(itemId=todo_id, db=db, todoItem=todoItem)
+
+@router.put("/updateTodoCheckStatu/{todo_id}")
+def updateTodo(todo_id: int, todoItem:schemas.TodoUpdateCheckStatus, db:Session = Depends(get_db)):
+    return crud.update_todo_check_status(itemId=todo_id, db=db, todoItem=todoItem)
