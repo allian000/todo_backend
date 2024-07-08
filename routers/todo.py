@@ -25,4 +25,4 @@ def updateTodo(todo_id: int, todoItem:schemas.TodoUpdateCheckStatus, db:Session 
 
 @router.delete("/deleteTodo/{todo_id}")
 def updateTodo(todo_id: int, db:Session = Depends(get_db)):
-    return crud.delete_todo(itemId=todo_id, db=db)
+    return crud.delete_todo(todoId=todo_id, db=db)
