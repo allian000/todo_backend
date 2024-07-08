@@ -26,3 +26,9 @@ def update_todo_check_status(db: Session,itemId:int, todoItem: TodoSchema.TodoUp
     db_item.is_checked = todoItem.is_checked
     db.commit()
     return db_item
+
+def delete_todo(db: Session, todoId: int):
+    db_item = db.query(TodoModel.Todo).filter(TodoModel.Todo.id == todoId).first()
+    db.delete(db_item)
+    db.commit()
+    return {"message": "Item deleted successfully"}
