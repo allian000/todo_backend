@@ -19,10 +19,13 @@ def createTodo(todo:schemas.TodoCreate, db:Session = Depends(get_db)):
 def updateTodo(todo_id: int, todoItem:schemas.TodoUpdate, db:Session = Depends(get_db)):
     return crud.update_todo(itemId=todo_id, db=db, todoItem=todoItem)
 
-@router.put("/updateTodoCheckStatu/{todo_id}", response_model=schemas.TodoUpdateCheckStatus)
+@router.put("/updateTodoCheck/{todo_id}", response_model=schemas.TodoUpdateCheckStatus)
 def updateTodo(todo_id: int, todoItem:schemas.TodoUpdateCheckStatus, db:Session = Depends(get_db)):
     return crud.update_todo_check_status(itemId=todo_id, db=db, todoItem=todoItem)
 
 @router.delete("/deleteTodo/{todo_id}")
-def updateTodo(todo_id: int, db:Session = Depends(get_db)):
+def deleteTodo(todo_id: int, db:Session = Depends(get_db)):
     return crud.delete_todo(todoId=todo_id, db=db)
+
+def deleteTodoWithList(todoIdList: List[int], db:Session = Depends(get_db)):
+    return crud.delete_todo_with_list(todoIdList=todoIdList, db=db)

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine
-from routers import todo
+from routers import todo, todo_completed
 from models import todo_model
 
 todo_model.Base.metadata.create_all(bind=engine)
@@ -27,3 +27,4 @@ def read_root():
     return {"Message":"Hello World!"}
 
 app.include_router(todo.router,prefix="/todo", tags=["todo"])
+app.include_router(todo_completed.router,prefix="/todo_completed", tags=["todo_completed"])

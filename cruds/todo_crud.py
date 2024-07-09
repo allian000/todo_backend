@@ -1,3 +1,4 @@
+from typing import List
 from sqlalchemy.orm import Session
 
 from models import todo_model as TodoModel
@@ -32,3 +33,11 @@ def delete_todo(db: Session, todoId: int):
     db.delete(db_item)
     db.commit()
     return {"message": "Item deleted successfully"}
+
+def delete_todo_with_list(db: Session, todoIdList: List[int]):
+    db_items = db.query(TodoModel.Todo).all()
+    for item in db_items:
+        if item.id in todoIdList:
+            db.delete(item)
+    db.commit()
+    return {"message": "Items deleted successfully"}
